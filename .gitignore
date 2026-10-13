@@ -1,0 +1,52 @@
+# --- Secrets / environment -------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- Any folder whose name starts with an underscore (e.g. _sources/, _docs/)
+_*/
+
+# --- Binary / heavy artefacts ----------------------------------------------
+*.onnx
+*.onnx.data
+*.so
+*.tgz
+*.tar.gz
+*.zip
+*.dylib
+
+# --- Node / tooling --------------------------------------------------------
+node_modules/
+.playwright-mcp/
+
+# --- Python ----------------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# --- Runtime state ---------------------------------------------------------
+context-data/
+logs/
+.run/
+.gradio/
+
+# --- input/ and output/ are tracked, their content is not ------------------
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+
+# --- Local agent configuration ---------------------------------------------
+AGENTS.md
+.bob/mcp.json
+.bob/rules/AGENTS.md
+
+# --- OS / editors ----------------------------------------------------------
+.DS_Store

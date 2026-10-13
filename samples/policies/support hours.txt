@@ -1,0 +1,4 @@
+Office hours
+
+The support desk is staffed Monday to Friday, 08:00 to 18:00 CET.
+Outside office hours, SEV1 incidents are escalated to the on-call engineer.

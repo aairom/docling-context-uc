@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "docling-context-uc"
+version = "0.1.0"
+description = "Production-style sample application for docling-context: ingest, organise, search and chat over local documents."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = [
+    # Core library under demonstration (pinned to a reviewed commit below).
+    "docling-context",
+    # DocLang is a direct dependency because uv only applies [tool.uv.sources]
+    # to the project's own dependencies, and the custom converter imports it.
+    "doclang",
+    "gradio>=5.0,<7",
+    "httpx>=0.27,<1",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+# Docling conversion for PDF / Office / images (large: pulls torch + models).
+conversion = ["docling-context[conversion]"]
+# Local embedding models for vector / hybrid search.
+vectors = ["docling-context[vectors]"]
+
+[project.scripts]
+dcuc = "dcuc.cli:main"
+
+[tool.uv.sources]
+docling-context = { git = "https://github.com/docling-project/docling-context", rev = "58b204846637da5709ea669e820f6ef416db7862" }
+doclang = { git = "https://github.com/doclang-project/doclang", rev = "92d299026f2f985328b52424483c711e19b2f306" }
+
+[dependency-groups]
+dev = ["pytest>=8.3,<9", "pytest-cov>=6.1", "ruff>=0.14"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["dcuc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
